@@ -32,8 +32,11 @@ public class Character {
         return hp > 0;
     }
 
-    public List<Character> GetFriends(String fullName){
-        return facebookProvider.GetFriends(getFullName());
-
+    public void attackFriends() throws Exception {
+        List<Character> friends = facebookProvider.GetFriends(getFullName());
+        for (Character friend:friends){
+            attack(friend);
+            System.out.println("I attacked " + friend.getFullName());
+        }
     }
 }

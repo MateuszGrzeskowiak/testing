@@ -7,11 +7,14 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.params.provider.Arguments.arguments;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Mockito.*;
 
 public class CharacterTests {
 
@@ -114,6 +117,27 @@ public class CharacterTests {
         Character attacker = new Character(new FakeFacebookProvider(), "Czesiek", "Kowalski",
                 10);
         attacker.attackFriends();
+    }
+
+    @Test
+    public void attackFriendsWithMock() throws Exception {
+        FacebookProvider providerMock = mock(FacebookProvider.class);
+        when(providerMock.GetFriends(anyString())).thenReturn(Arrays.asList(
+                new Character(null, "sztuczny znajomy 1", "sztuczny znajomy 1", 10),
+                new Character(null, "sztuczny znajomy 2", "sztuczny znajomy 2", 3)));
+        Character attacker = new Character(providerMock, "Czesiek", "Kowalski",
+                10);
+        attacker.attackFriends();
+    }
+
+    @Test
+    public void attackFriends_facebookProviderIsCalledForCharactersFullName() throws Exception {
+        FacebookProvider providerMock = mock(FacebookProvider.class);
+        Character attacker = new Character(providerMock, "Czesiek", "Kowalski",
+                10);
+        attacker.attackFriends();
+        verify(providerMock, times(1)).GetFriends("Czesiek Kowalski");
+        verifyNoMoreInteractions(providerMock);
     }
 
 

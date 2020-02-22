@@ -33,6 +33,7 @@ public class Character {
     }
 
     public void attackFriends() throws Exception {
+       // facebookProvider.GetFriends(getFullName());
         List<Character> friends = facebookProvider.GetFriends(getFullName());
         for (Character friend:friends){
             attack(friend);

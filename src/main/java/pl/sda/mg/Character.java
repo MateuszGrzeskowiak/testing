@@ -46,5 +46,9 @@ public class Character
         return hp > 0;
     }
 
+    public void heal(){
+        hp = maxHp;
+    }
+
 
 }

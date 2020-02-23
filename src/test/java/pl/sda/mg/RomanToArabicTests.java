@@ -92,7 +92,7 @@ public class RomanToArabicTests {
                 arguments("XLVII", 47),
                 arguments("XLVIII", 48),
                 arguments("XLIX", 49),
-                arguments("L", 50)
+                arguments("MMLXI", 2061)
         );
     }
 

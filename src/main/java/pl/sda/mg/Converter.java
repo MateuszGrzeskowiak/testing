@@ -1,14 +1,5 @@
 package pl.sda.mg;
 
-import org.junit.jupiter.params.provider.Arguments;
-
-import java.util.HashMap;
-import java.util.IllegalFormatCodePointException;
-import java.util.Map;
-import java.util.stream.Stream;
-
-import static org.junit.jupiter.params.provider.Arguments.arguments;
-
 public class Converter {
 
     public int valueOfSingleRoman(char singleRoman) {

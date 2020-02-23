@@ -14,31 +14,31 @@ public class RomanToArabicTests {
     @Test
     public void convert_StringI_returnOne() {
         Converter converter = new Converter();
-        int result = converter.convert("I");
+        int result = converter.convertRomanToArabic("I");
     }
 
     @Test
     public void convert_StringII_returnTwo() {
         Converter converter = new Converter();
-        converter.convert("II");
+        converter.convertRomanToArabic("II");
     }
 
     @Test
     public void convert_StringIII_returnThree() {
         Converter converter = new Converter();
-        converter.convert("III");
+        converter.convertRomanToArabic("III");
     }
 
     @Test
     public void convert_StringIV_returnFour() {
         Converter converter = new Converter();
-        converter.convert("IV");
+        converter.convertRomanToArabic("IV");
     }
 
     @Test
     public void convert_StringV_returnFive() {
         Converter converter = new Converter();
-        converter.convert("V");
+        converter.convertRomanToArabic("V");
     }
 
     static Stream<Arguments> argumentProvider() {
@@ -103,7 +103,7 @@ public class RomanToArabicTests {
 
         Converter convert = new Converter();
 
-        int result = convert.convert(input);
+        int result = convert.convertRomanToArabic(input);
 
         assertThat(result).isEqualTo(expectedResult);
     }

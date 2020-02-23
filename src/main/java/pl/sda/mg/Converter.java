@@ -11,39 +11,49 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class Converter {
 
-    public int convert(String input) {
-//        if (input.equals("I")) {
-//            return 1;
-//        }else if (input.equals("II")){
-//            return 2;
-//        }else return 3;
-//    }
-
-        Map<java.lang.Character, Integer> map = new HashMap<>();
-        map.put('I', 1);
-        map.put('V', 5);
-        map.put('X', 10);
-        map.put('L', 50);
-        map.put('C', 100);
-        map.put('D', 500);
-        map.put('M', 1000);
-
-
+    public int valueOfSingleRoman(char singleRoman) {
         int result = 0;
-        for (int i = 0; i < input.length() - 1; i++) {
-            char currentChar = input.charAt(i);
-            char nextChar = input.charAt(i + 1);
+        if (singleRoman == 'I') {
+            result = 1;
+        }
+        if (singleRoman == 'V') {
+            result = 5;
+        }
+        if (singleRoman == 'X') {
+            result = 10;
+        }
+        if (singleRoman == 'L') {
+            result = 50;
+        }
+        if (singleRoman == 'C') {
+            result = 100;
+        }
+        if (singleRoman == 'D') {
+            result = 500;
+        }
+        if (singleRoman == 'M') {
+            result = 1000;
+        }
+        return result;
+    }
 
-
-            int currentCharValue = map.get(currentChar);
-            int nextCharValue = map.get(nextChar);
-
-            if (currentCharValue < nextCharValue) {
-                result = result - currentCharValue + nextCharValue;
-            } else if (currentCharValue >= nextCharValue){
-                result = result + currentCharValue + nextCharValue;
-
+    public int convertRomanToArabic(String RomanNumber) {
+        char[] chars = RomanNumber.toCharArray();
+        int sum = 0;
+        for (int i = 0; i < chars.length - 1; i++) {
+            char current = chars[i];
+            char next = chars[i + 1];
+            int currentValue = valueOfSingleRoman(current);
+            int nextValue = valueOfSingleRoman(next);
+            if (currentValue >= nextValue) {
+                sum = sum + valueOfSingleRoman(current);
+            } else {
+                sum = sum - valueOfSingleRoman(current);
             }
+        }
+        return sum + valueOfSingleRoman(chars[chars.length - 1]);
+    }
+}
 
 
 //            if (input.charAt(i) == 'I') {
@@ -83,9 +93,3 @@ public class Converter {
 //                result = result + 50;
 //
 //            }
-        }
-        return result;
-
-    }
-
-}

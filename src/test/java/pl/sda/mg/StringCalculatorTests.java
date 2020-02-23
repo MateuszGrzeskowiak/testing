@@ -1,8 +1,14 @@
 package pl.sda.mg;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class StringCalculatorTests {
     @Test
@@ -32,13 +38,25 @@ public class StringCalculatorTests {
         assertThat(result).isEqualTo(4);
     }
 
-    @Test
-    public void calculate_8plus9_returnsSeventeen() {
+    static Stream<Arguments> argumentProvider() {
+        return Stream.of(
+                arguments("1+1", 2),
+                arguments("1+2", 3),
+                arguments("2+2", 4),
+                arguments("8+9", 17)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("argumentProvider")
+    public void calculate_8addingTwoSingleDigits_returnsCorrectResult
+            (String input, int expectedResult) {
+
         StringCalculator calc = new StringCalculator();
 
-        int result = calc.calculate("8+9");
+        int result = calc.calculate(input);
 
-        assertThat(result).isEqualTo(17);
+        assertThat(result).isEqualTo(expectedResult);
 
     }
 }
